@@ -1,0 +1,46 @@
+.box {
+  width: var(--box-width);
+  height: var(--box-height);
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 4px 24px #00000014;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.box-image {
+  height: calc(var(--box-height) * 0.77);
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.box-text {
+  height: calc(var(--box-height) * 0.23);
+  /* border-radius: 0px 0px 4px 4px; */
+  text-align: center;
+  font: normal normal normal 16px/19px Barlow;
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.related-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px; 
+  margin-top: 16px; 
+  position: absolute; 
+  top: 225px;
+  left: 304px;
+}
+
+.related-image-item {
+  width: 304px;
+  height: 295px;
+  /* background: transparent url('img/Rectangle 8.png') 0% 0% no-repeat padding-box; */
+  border-radius: 4px;
+  opacity: 1;
+  background-size: cover; 
+  background-position: center;
+}
