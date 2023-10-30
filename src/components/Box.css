@@ -5,6 +5,15 @@
   box-shadow: 0px 4px 24px #00000014;
   border-radius: 4px;
   opacity: 1;
+  transition: all 0.4s ease; /* Smooth transition for all properties */
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.box:hover {
+  transform: scale(1.05); /* Scale up and rotate */
+  background: linear-gradient(135deg, #d3d1b0, #ffffff); /* A subtle gradient */
+  box-shadow: 0px 6px 30px #0000002A; /* Deeper shadow for lifted effect */
 }
 
 .box-image {
@@ -33,6 +42,7 @@
   position: absolute; 
   top: 225px;
   left: 304px;
+  transition: filter 0.3s ease, border 0.3s ease;
 }
 
 .related-image-item {
@@ -44,3 +54,4 @@
   background-size: cover; 
   background-position: center;
 }
+
