@@ -1,9 +1,9 @@
 import React from 'react';
 import './Box.css';
-import defaultImage from '../images/default-image.jpg';  // Import a default image
+import defaultImage from '../images/default-image.avif';
 
 function Box({ top, left, text, mainImage, onClick }) {
-  const imageToDisplay = mainImage || defaultImage; // Use mainImage if available, otherwise use defaultImage
+  const imageToDisplay = mainImage || defaultImage;
   
   return (
     <div className="box" style={{ top: `${top}px`, left: `${left}px` }} onClick={onClick}>

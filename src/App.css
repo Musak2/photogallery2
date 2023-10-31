@@ -45,3 +45,44 @@
     --box-height: 240px;
   }
 }
+
+@media (max-width: 1400px) {
+  :root {
+    --box-width: 200px;
+    --box-height: 190px;
+  }
+}
+
+.preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.preview-image {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 5px;
+}
+
+.navigation-circle {
+  width: 80px;
+  height: 80px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
+  opacity: 1;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+

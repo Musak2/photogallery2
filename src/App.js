@@ -1,12 +1,14 @@
 // App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Box from './components/Box';  // Import the Box component
+import Box from './components/Box';
 
 function App() {
   const [boxes, setBoxes] = useState([]);
   const [viewingCategory, setViewingCategory] = useState(null);
   const maxBoxesInRow = 4;
+  const [previewImage, setPreviewImage] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
 
@@ -21,13 +23,13 @@ function App() {
         const mappedData = data.galleries.map((gallery, index) => ({
           id: index,
           text: decodeURIComponent(gallery.name),
-          mainImage: gallery.image ? `http://api.programator.sk/${gallery.image.fullpath}` : null,
+          mainImage: gallery.image ? `http://api.programator.sk/images/300x200/${gallery.image.fullpath}` : null,
           relatedImages: []
         }));
 
         return Promise.all(
           mappedData.map((box) => {
-            // Skip categories without images
+
             if (!box.mainImage) {
               return Promise.resolve(box);
             }
@@ -43,7 +45,7 @@ function App() {
               })
               .then(data => {
                 if (data && data.images) {
-                  box.relatedImages = data.images.map(img => `http://api.programator.sk/${img.fullpath}`);
+                  box.relatedImages = data.images.map(image => `http://api.programator.sk/images/300x200/${image.fullpath}`);
                 }
                 return box;
               });
@@ -61,44 +63,6 @@ function App() {
 
   }, []);
 
-  // useEffect(() => {
-  //   // Simulated API call
-  //   setTimeout(() => {
-  //     setBoxes([
-  //       {
-  //         id: 0,
-  //         text: "Príroda",
-  //         mainImage: dolphinsImage,
-  //         relatedImages: ['path/to/image1_2.jpg', 'path/to/image1_3.jpg']
-  //       },
-  //       {
-  //         id: 1,
-  //         text: "Architektúra",
-  //         mainImage: dolphinsImage,
-  //         relatedImages: ['path/to/image2_1.jpg', 'path/to/image2_2.jpg']
-  //       },
-  //       {
-  //         id: 2,
-  //         text: "Ľudia",
-  //         mainImage: dolphinsImage,
-  //         relatedImages: ['path/to/image3_1.jpg', 'path/to/image3_2.jpg']
-  //       },
-  //       {
-  //         id: 3,
-  //         text: "Jedlo",
-  //         mainImage: dolphinsImage,
-  //         relatedImages: ['path/to/image4_1.jpg', 'path/to/image4_2.jpg']
-  //       },
-  //       {
-  //         id: 4,
-  //         text: "Abstratkné",
-  //         mainImage: dolphinsImage,
-  //         relatedImages: ['path/to/image5_1.jpg', 'path/to/imag51_2.jpg']
-  //       },
-  //     ]);
-  //   }, 1000);
-  // }, []);
-
   const handleCategoryClick = (category) => {
     setViewingCategory(category);
   };
@@ -107,10 +71,49 @@ function App() {
     setViewingCategory(null);
   };
 
+  const openPreview = (category, imageName, index = 0) => {
+    const fullSizeImageUrl = `http://api.programator.sk/images/800x600/${category}/${imageName}`;
+    setCurrentImageIndex(index);
+    setPreviewImage(fullSizeImageUrl);
+  };
+
+  const closePreview = () => {
+    setPreviewImage(null);
+  };
+
+  const navigateGallery = (direction) => {
+
+    if (!viewingCategory || !viewingCategory.relatedImages) return;
+
+    console.log("Current Image Index:", currentImageIndex);
+    console.log("Viewing Category Related Images Length:", viewingCategory.relatedImages.length);
+    console.log("Type of currentImageIndex:", typeof currentImageIndex);
+    console.log("Type of viewingCategory.relatedImages.length:", typeof viewingCategory.relatedImages.length);
+
+    if (isNaN(currentImageIndex) || isNaN(viewingCategory.relatedImages.length)) {
+      console.error("Either currentImageIndex or relatedImages.length is not a number.");
+      return;
+    }
+
+    let newIndex = currentImageIndex;
+    if (direction === 'prev') {
+      newIndex = (newIndex - 1 + viewingCategory.relatedImages.length) % viewingCategory.relatedImages.length;
+    } else if (direction === 'next') {
+      newIndex = (newIndex + 1) % viewingCategory.relatedImages.length;
+    }
+
+    console.log("New Index:", newIndex);
+
+    if (viewingCategory.relatedImages[newIndex]) {
+      const newImageName = viewingCategory.relatedImages[newIndex].split('/').pop();
+      openPreview(viewingCategory.text, newImageName, newIndex);
+    }
+  };
+
+
+
   return (
     <div className="App">
-      {/* Adding a button to fetch data */}
-      {/* <button onClick={fetchData}>Load Categories</button> */}
       <div className="fotogaleria-text">Fotogaléria</div>
 
       <div className="kategorie-text" onClick={viewingCategory ? goBack : null}>
@@ -126,21 +129,37 @@ function App() {
             top={225 + Math.floor(index / maxBoxesInRow) * (295 + 32)}
             left={304 + (index % maxBoxesInRow) * (304 + 32)}
             text={box.text}
-            mainImage={box.mainImage}  // corrected from box.image
-            onClick={() => handleCategoryClick(box)}
+            mainImage={box.mainImage}
+            onClick={() => {
+              handleCategoryClick(box);
+            }}
           />
         );
       })}
 
       {/* If viewing a specific category, show its images */}
-      {viewingCategory && viewingCategory.relatedImages.map((image, index) => (  // corrected from viewingCategory.images
+      {viewingCategory && viewingCategory.relatedImages.map((image, index) => (
         <Box
           key={index}
           top={225 + Math.floor(index / maxBoxesInRow) * (295 + 32)}
           left={304 + (index % maxBoxesInRow) * (304 + 32)}
           mainImage={image}
+          onClick={() => openPreview(viewingCategory.text, image.split('/').pop(), index)}
         />
       ))}
+
+      {/* Simple image preview */}
+      {previewImage && (
+        <div className="preview-overlay" onClick={closePreview}>
+          <div className="navigation-circle" style={{ left: '18%' }} onClick={(e) => { e.stopPropagation(); navigateGallery('prev'); }}>
+            ←
+          </div>
+          <img className="preview-image" src={previewImage} alt="Full Preview" />
+          <div className="navigation-circle" style={{ right: '18%' }} onClick={(e) => { e.stopPropagation(); navigateGallery('next'); }}>
+            →
+          </div>
+        </div>
+      )}
 
     </div>
   );
