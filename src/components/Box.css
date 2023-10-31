@@ -55,3 +55,29 @@
   background-position: center;
 }
 
+.full-height-image {
+  height: 100%;
+}
+
+.photo-count {
+  width: 46px;
+  height: 20px;
+  background: #00000052;
+  border-radius: 12px;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 11px;
+}
+
+.photo-count-wrapper {
+  position: relative;
+}
+
+.photo-count {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}

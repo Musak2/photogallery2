@@ -24,7 +24,8 @@ function App() {
           id: index,
           text: decodeURIComponent(gallery.name),
           mainImage: gallery.image ? `http://api.programator.sk/images/300x200/${gallery.image.fullpath}` : null,
-          relatedImages: []
+          relatedImages: [],
+          numberOfImages: 0
         }));
 
         return Promise.all(
@@ -46,6 +47,7 @@ function App() {
               .then(data => {
                 if (data && data.images) {
                   box.relatedImages = data.images.map(image => `http://api.programator.sk/images/300x200/${image.fullpath}`);
+                  box.numberOfImages = data.images.length;
                 }
                 return box;
               });
@@ -85,10 +87,10 @@ function App() {
 
     if (!viewingCategory || !viewingCategory.relatedImages) return;
 
-    console.log("Current Image Index:", currentImageIndex);
-    console.log("Viewing Category Related Images Length:", viewingCategory.relatedImages.length);
-    console.log("Type of currentImageIndex:", typeof currentImageIndex);
-    console.log("Type of viewingCategory.relatedImages.length:", typeof viewingCategory.relatedImages.length);
+    // console.log("Current Image Index:", currentImageIndex);
+    // console.log("Viewing Category Related Images Length:", viewingCategory.relatedImages.length);
+    // console.log("Type of currentImageIndex:", typeof currentImageIndex);
+    // console.log("Type of viewingCategory.relatedImages.length:", typeof viewingCategory.relatedImages.length);
 
     if (isNaN(currentImageIndex) || isNaN(viewingCategory.relatedImages.length)) {
       console.error("Either currentImageIndex or relatedImages.length is not a number.");
@@ -102,15 +104,13 @@ function App() {
       newIndex = (newIndex + 1) % viewingCategory.relatedImages.length;
     }
 
-    console.log("New Index:", newIndex);
+    // console.log("New Index:", newIndex);
 
     if (viewingCategory.relatedImages[newIndex]) {
       const newImageName = viewingCategory.relatedImages[newIndex].split('/').pop();
       openPreview(viewingCategory.text, newImageName, newIndex);
     }
   };
-
-
 
   return (
     <div className="App">
@@ -122,7 +122,6 @@ function App() {
 
       {/* If not viewing a specific category, show all categories */}
       {!viewingCategory && boxes.map((box, index) => {
-        console.log("Box image: ", box.mainImage)
         return (
           <Box
             key={box.id}
@@ -130,9 +129,8 @@ function App() {
             left={304 + (index % maxBoxesInRow) * (304 + 32)}
             text={box.text}
             mainImage={box.mainImage}
-            onClick={() => {
-              handleCategoryClick(box);
-            }}
+            onClick={() => {handleCategoryClick(box);}}
+            imageCount={box.numberOfImages}
           />
         );
       })}
@@ -151,11 +149,11 @@ function App() {
       {/* Simple image preview */}
       {previewImage && (
         <div className="preview-overlay" onClick={closePreview}>
-          <div className="navigation-circle" style={{ left: '18%' }} onClick={(e) => { e.stopPropagation(); navigateGallery('prev'); }}>
+          <div className="navigation-circle" style={{ left: '10%' }} onClick={(e) => { e.stopPropagation(); navigateGallery('prev'); }}>
             ←
           </div>
           <img className="preview-image" src={previewImage} alt="Full Preview" />
-          <div className="navigation-circle" style={{ right: '18%' }} onClick={(e) => { e.stopPropagation(); navigateGallery('next'); }}>
+          <div className="navigation-circle" style={{ right: '10%' }} onClick={(e) => { e.stopPropagation(); navigateGallery('next'); }}>
             →
           </div>
         </div>
