@@ -5,15 +5,19 @@
   box-shadow: 0px 4px 24px #00000014;
   border-radius: 4px;
   opacity: 1;
-  transition: all 0.4s ease; /* Smooth transition for all properties */
+  transition: all 0.4s ease;
+  /* Smooth transition for all properties */
   transform-origin: center;
   cursor: pointer;
 }
 
 .box:hover {
-  transform: scale(1.05); /* Scale up and rotate */
-  background: linear-gradient(135deg, #d3d1b0, #ffffff); /* A subtle gradient */
-  box-shadow: 0px 6px 30px #0000002A; /* Deeper shadow for lifted effect */
+  transform: scale(1.05);
+  /* Scale up and rotate */
+  background: linear-gradient(135deg, #d3d1b0, #ffffff);
+  /* A subtle gradient */
+  box-shadow: 0px 6px 30px #0000002A;
+  /* Deeper shadow for lifted effect */
 }
 
 .box-image {
@@ -37,9 +41,9 @@
 .related-images {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px; 
-  margin-top: 16px; 
-  position: absolute; 
+  gap: 32px;
+  margin-top: 16px;
+  position: absolute;
   top: 225px;
   left: 304px;
   transition: filter 0.3s ease, border 0.3s ease;
@@ -51,7 +55,7 @@
   /* background: transparent url('img/Rectangle 8.png') 0% 0% no-repeat padding-box; */
   border-radius: 4px;
   opacity: 1;
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
 }
 
@@ -72,12 +76,36 @@
   font-size: 11px;
 }
 
-/* .photo-count-wrapper {
+.plus-symbol {
   position: relative;
+  border: solid 2px black;
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.32;
 }
 
-.photo-count {
+.plus-symbol::before,
+.plus-symbol::after {
+  content: "";
   position: absolute;
-  top: 10px;
-  left: 10px;
-} */
+  background-color: black;
+  width: 2px;
+  height: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.plus-symbol::before {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.addText {
+  padding-top: 16px;
+  text-align: center;
+  font: normal normal normal 16px/19px Barlow;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}

@@ -73,8 +73,8 @@
 }
 
 .navigation-circle {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background: #FFFFFF;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
   opacity: 1;
@@ -84,5 +84,68 @@
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
+  font-size: 30px;
 }
 
+.popup-box {
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 325px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  opacity: 1;
+}
+
+.popup-box2 {
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 499px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  opacity: 1;
+}
+
+h3 {
+  font: normal normal normal 24px/29px Barlow;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+button {
+  display: block;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.textfield .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: black; /* Your default color */
+}
+
+.textfield .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(161, 159, 159); /* Your focus color */
+}
+
+.textfield .MuiFormLabel-root {
+  color: black; /* Your default label color */
+}
+
+.textfield .MuiFormLabel-root.Mui-focused {
+  color: black; /* Your focused label color */
+}
+
+.addBoxText{
+  font: normal normal normal 16px/19px Barlow;
+}
+
+.addBoxMiddleText{
+  font: normal normal normal 16px/19px Barlow;
+  opacity: 0.56;
+}
