@@ -46,7 +46,7 @@ function App() {
               })
               .then(data => {
                 if (data && data.images) {
-                  box.relatedImages = data.images.map(image => `http://api.programator.sk/images/300x200/${image.fullpath}`);
+                  box.relatedImages = data.images.map(image => `http://api.programator.sk/images/0x0/${image.fullpath}`);
                   box.numberOfImages = data.images.length;
                 }
                 return box;
@@ -74,7 +74,7 @@ function App() {
   };
 
   const openPreview = (category, imageName, index = 0) => {
-    const fullSizeImageUrl = `http://api.programator.sk/images/800x600/${category}/${imageName}`;
+    const fullSizeImageUrl = `http://api.programator.sk/images/0x0/${category}/${imageName}`;
     setCurrentImageIndex(index);
     setPreviewImage(fullSizeImageUrl);
   };
