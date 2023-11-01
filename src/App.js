@@ -6,8 +6,6 @@ import Toast from './components/Toast';
 import TextField from '@mui/material/TextField';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-
-
 function App() {
   const [boxes, setBoxes] = useState([]);
   const [viewingCategory, setViewingCategory] = useState(null);
@@ -140,7 +138,7 @@ function App() {
 
   const handleClosePopup = () => {
     setShowPopup(false); // Hide the popup
-    // setActualCategory('');
+    setSelectedImageNames([]);    
   };
 
   const postCategory = (categoryName) => {
