@@ -126,26 +126,35 @@ button {
 }
 
 .textfield .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color: black; /* Your default color */
+  border-color: black;
+  /* Your default color */
 }
 
 .textfield .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: rgb(161, 159, 159); /* Your focus color */
+  border-color: rgb(161, 159, 159);
+  /* Your focus color */
 }
 
 .textfield .MuiFormLabel-root {
-  color: black; /* Your default label color */
+  color: black;
+  /* Your default label color */
 }
 
 .textfield .MuiFormLabel-root.Mui-focused {
-  color: black; /* Your focused label color */
+  color: black;
+  /* Your focused label color */
 }
 
-.addBoxText{
+.addBoxText {
   font: normal normal normal 16px/19px Barlow;
 }
 
-.addBoxMiddleText{
+.addBoxMiddleText {
   font: normal normal normal 16px/19px Barlow;
   opacity: 0.56;
+}
+
+.addBoxText2:hover {
+  background-color: #000000;
+  color: white;
 }
