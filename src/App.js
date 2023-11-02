@@ -278,9 +278,9 @@ function App() {
               top: `${225 + Math.floor(boxes.length / maxBoxesInRow) * (295 + 32)}px`,
               left: `${304 + (boxes.length % maxBoxesInRow) * (304 + 32)}px`,
               cursor: 'pointer',
-              display: 'flex',  // Added this line
+              display: 'flex',  
               flexDirection: 'column',
-              justifyContent: 'center', // Added this line
+              justifyContent: 'center', 
               alignItems: 'center',
             }}
             onClick={handleBoxClick}
@@ -366,19 +366,19 @@ function App() {
                     }}
                     onDragOver={(e) => {
                       e.preventDefault();
-                      setDragging(true);  // Set dragging state to true
+                      setDragging(true);  
                     }}
                     onDragEnter={(e) => {
                       e.preventDefault();
-                      setDragging(true);  // Set dragging state to true
+                      setDragging(true);  
                     }}
                     onDragLeave={(e) => {
                       e.preventDefault();
-                      setDragging(false);  // Set dragging state to false
+                      setDragging(false);  
                     }}
                     onDrop={(e) => {
                       e.preventDefault();
-                      setDragging(false);  // Set dragging state to false
+                      setDragging(false);  
                       const files = e.dataTransfer.files;
                       setSelectedImages(files);
                       const fileNames = Array.from(files).map(file => file.name);
