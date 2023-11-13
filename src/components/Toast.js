@@ -8,7 +8,7 @@ const Toast = ({ message, type, isVisible, onClose, onClosed }) => {
             const timer = setTimeout(() => {
                 onClose();
                 if (onClosed) onClosed();
-            }, 3000); // Toast will disappear after 5 seconds
+            }, 5000); 
 
             return () => clearTimeout(timer);
         }
