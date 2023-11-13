@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-const AddPhotosPopup = ({ onClose, actualCategory, setToastInfo, fetchPhotosData }) => {
+const AddPhotosPopup = ({ onClose, actualCategory, setToastInfo, fetchPhotosData, onPhotoAdded }) => {
     const [selectedImages, setSelectedImages] = useState([]);
     const [selectedImageNames, setSelectedImageNames] = useState([]);
     const [dragging, setDragging] = useState(false);
@@ -46,6 +46,7 @@ const AddPhotosPopup = ({ onClose, actualCategory, setToastInfo, fetchPhotosData
                 });
                 onClose();
                 fetchPhotosData(actualCategory);
+                onPhotoAdded();
             })
             .then(() => {
                 console.log('Gallery data refreshed after image upload');

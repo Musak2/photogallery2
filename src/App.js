@@ -55,6 +55,14 @@ function App() {
     }
   }, [boxes, viewingCategoryText]);
 
+  const handlePhotoAdded = () => {
+    fetchGalleryData().then(data => {
+      setBoxes(data);
+    }).catch(error => {
+      console.error('Error refetching gallery data:', error);
+      // Handle error (e.g., show notification)
+    });
+  };
 
   const setCategory = (category) => {
     setActualCategory(category);  // Update the state variable
@@ -144,7 +152,8 @@ function App() {
           onClose={() => setShowAddPhotosPopup(false)}
           actualCategory={actualCategory}
           setToastInfo={setToastInfo}
-          fetchPhotosData={updatePhotosData }
+          fetchPhotosData={updatePhotosData}
+          onPhotoAdded={handlePhotoAdded}
         />
       )}
 
