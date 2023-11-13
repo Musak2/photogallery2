@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 
-const AddCategoryPopup = ({ onClose, setToastInfo, fetchGalleryData }) => {
+const AddCategoryPopup = ({ onClose, setToastInfo, onCategoryAdded }) => {
   const [categoryName, setCategoryName] = useState('');
 
   const postCategory = (categoryName) => {
@@ -32,7 +32,7 @@ const AddCategoryPopup = ({ onClose, setToastInfo, fetchGalleryData }) => {
     })
     .then(data => {
       console.log('Successfully added a category:', data);
-      fetchGalleryData();
+      onCategoryAdded();
       setToastInfo({
         message: 'Successfully added a category!',
         type: 'success',

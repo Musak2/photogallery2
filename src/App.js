@@ -7,6 +7,7 @@ import AddPhotosPopup from './components/AddPhotosPopup';
 import GalleryList from './components/GalleryList';
 import ImagePreviewOverlay from './components/ImagePreviewOverlay';
 import CategoryList from './components/CategoryList';
+import { fetchGalleryData, fetchPhotosData } from './services/apiService';
 
 function App() {
   const [boxes, setBoxes] = useState([]);
@@ -16,103 +17,33 @@ function App() {
   const [actualCategory, setActualCategory] = useState(null);
   const [showAddCategoryPopup, setShowAddCategoryPopup] = useState(false);
   const [showAddPhotosPopup, setShowAddPhotosPopup] = useState(false);
+  const [categoryAdded, setCategoryAdded] = useState(false);
 
   const maxBoxesInRow = 4;
   const viewingCategoryText = viewingCategory ? viewingCategory.text : null;
 
   useEffect(() => {
+    fetchGalleryData().then(data => {
+      setBoxes(data);
+    }).catch(error => {
+      console.error('Error fetching gallery data:', error);
+      // Handle error (e.g., show notification)
+    });
+  }, [categoryAdded]);
 
-    fetchGalleryData();
-
-  }, []);
-
-  const fetchGalleryData = () => {
-    fetch('http://api.programator.sk/gallery')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+  const updatePhotosData = async (category) => {
+    try {
+      const images = await fetchPhotosData(category);
+      setBoxes(boxes => boxes.map(box => {
+        if (box.text === category) {
+          return { ...box, relatedImages: images, numberOfImages: images.length };
         }
-        return response.json();
-      })
-      .then(data => {
-        if (!data || !data.galleries) {
-          console.error("Unexpected data structure:", data);
-          return;
-        }
-
-        const mappedData = data.galleries.map((gallery, index) => ({
-          id: index, // Assuming each gallery has a unique index. Modify as needed.
-          text: decodeURIComponent(gallery.name),
-          mainImage: gallery.image ? `http://api.programator.sk/images/300x200/${gallery.image.fullpath}` : null,
-          relatedImages: [],
-          numberOfImages: 0
-        }));
-
-        return Promise.all(mappedData.map(box => {
-          if (!box.mainImage) {
-            return Promise.resolve(box);
-          }
-
-          const encodedCategory = encodeURIComponent(box.text);
-          return fetch(`http://api.programator.sk/gallery/${encodedCategory}`)
-            .then(response => response.json())
-            .then(data => {
-              if (data && data.images) {
-                box.relatedImages = data.images.map(image => `http://api.programator.sk/images/300x200/${image.fullpath}`);
-                box.numberOfImages = data.images.length;
-              }
-              return box;
-            });
-        }));
-      })
-      .then(updatedBoxes => {
-        if (updatedBoxes) {
-          setBoxes(updatedBoxes);
-        }
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
-  };
-
-  const fetchPhotosData = (category) => {
-    const encodedCategory = encodeURIComponent(category);
-
-    console.log(`Fetching photos for category: ${category}`);
-    console.log('Before fetching, boxes:', boxes);
-
-    fetch(`http://api.programator.sk/gallery/${encodedCategory}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (!data || !data.images) {
-          console.error("Unexpected data structure:", data);
-          return;
-        }
-
-        console.log(`Received data for category ${category}:`, data);
-
-        const updatedBoxes = boxes.map(box => {
-          if (box.text === category) {
-            console.log(`Updating box for category ${category}`);
-            return {
-              ...box,
-              relatedImages: data.images.map(image => `http://api.programator.sk/images/300x200/${image.fullpath}?timestamp=${new Date().getTime()}`),
-              numberOfImages: data.images.length
-            };
-          }
-          return box;
-        });
-
-        setBoxes(updatedBoxes);
-      })
-      .catch(error => {
-        console.error('Error fetching photos data:', error);
-      });
+        return box;
+      }));
+    } catch (error) {
+      console.error(`Error fetching photos for category ${category}:`, error);
+      // Handle error (e.g., show notification)
+    }
   };
 
   useEffect(() => {
@@ -161,8 +92,6 @@ function App() {
       newIndex = (newIndex + 1) % viewingCategory.relatedImages.length;
     }
 
-    // console.log("New Index:", newIndex);
-
     if (viewingCategory.relatedImages[newIndex]) {
       const newImageName = viewingCategory.relatedImages[newIndex].split('/').pop();
       openPreview(viewingCategory.text, newImageName, newIndex);
@@ -197,7 +126,7 @@ function App() {
         <AddCategoryPopup
           onClose={() => setShowAddCategoryPopup(false)}
           setToastInfo={setToastInfo}
-          fetchGalleryData={fetchGalleryData}
+          onCategoryAdded={() => setCategoryAdded(prev => !prev)}
         />
       )}
 
@@ -215,7 +144,7 @@ function App() {
           onClose={() => setShowAddPhotosPopup(false)}
           actualCategory={actualCategory}
           setToastInfo={setToastInfo}
-          fetchPhotosData={fetchPhotosData}
+          fetchPhotosData={updatePhotosData }
         />
       )}
 
