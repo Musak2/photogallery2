@@ -4,6 +4,29 @@
   --box-height: 295px;
   --box-top: 20px;
   --box-left: 150px;
+  --background-color: #d3d1b0;
+  --animation-duration: 10s; 
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+@keyframes colorChange {
+  0% {
+    background: var(--background-color);
+  }
+  50% {
+    background: #b0d3d1;
+  }
+  100% {
+    background: var(--background-color);
+  }
+}
+
+body {
+  animation: colorChange var(--animation-duration) infinite;
 }
 
 .App {
