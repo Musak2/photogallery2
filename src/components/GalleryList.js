@@ -21,7 +21,7 @@ const GalleryList = ({ boxes, onCategoryClick, onAddCategoryClick }) => {
             >
                 <div className="plus-symbol">
                 </div>
-                <div className="add-text">
+                <div className="addText">
                     Pridať kategóriu
                 </div>
             </div>

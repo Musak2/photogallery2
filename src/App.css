@@ -1,10 +1,9 @@
-/* Create CSS variables for the default sizes, so they can be reused and overridden */
 :root {
   --box-width: 304px;
   --box-height: 295px;
   --box-top: 20px;
   --box-left: 150px;
-  --background-color: #d3d1b0;
+  --background-color: #e8e7d2;
   --animation-duration: 10s; 
 }
 
@@ -18,7 +17,7 @@ body {
     background: var(--background-color);
   }
   50% {
-    background: #b0d3d1;
+    background: #d4e6e5;
   }
   100% {
     background: var(--background-color);
@@ -36,12 +35,9 @@ body {
   gap: 32px;
   padding: var(--box-top) var(--box-left);
   max-width: calc(4 * var(--box-width) + 3 * 32px);
-  /* Maximum width for 4 boxes in a row including gaps */
   margin: 0 auto;
-  /* Horizontally center the .App container */
 }
 
-/* Set font-related styles for headers */
 .fotogaleria-text {
   width: 100%;
   text-align: left;
@@ -101,6 +97,17 @@ body {
   :root {
     --box-width: 100px;
     --box-height: 100px;
+  }
+  .fotogaleria-text{
+    text-align: center;
+    font-size: 15px;
+  }
+  .kategorie-text{
+    text-align: center;
+    font-size: 13px;
+  }
+  .App{
+    justify-content: center;
   }
 }
 

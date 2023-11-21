@@ -74,18 +74,6 @@
   font-size: 11px;
 }
 
-@media (max-width: 600px) {
-  .photo-count {
-    font-size: 9px;
-  }
-}
-
-@media (max-width: 400px) {
-  .photo-count {
-    font-size: 7px; 
-  }
-}
-
 .plus-symbol {
   position: relative;
   border: solid 2px black;
@@ -118,4 +106,29 @@
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .photo-count {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 500px) {
+  .photo-count {
+    font-size: 7px;
+  }
+
+  .box-text {
+    font-size: 8px;
+  }
+
+  .addText {
+    font-size: 8px;
+  }
+
+  .photo-count {
+    width: 29px;
+    height: 15px;
+  }
 }
