@@ -1,0 +1,23 @@
+ .popup-box {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .close-button {
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  
+  .submit-button {
+    height: 60px;
+  }
+  

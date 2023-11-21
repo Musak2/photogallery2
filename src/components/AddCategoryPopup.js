@@ -1,6 +1,6 @@
-// components/AddCategoryPopup.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
+import './AddCategoryPopup.css';
 
 const AddCategoryPopup = ({ onClose, setToastInfo, onCategoryAdded }) => {
   const [categoryName, setCategoryName] = useState('');
@@ -13,46 +13,60 @@ const AddCategoryPopup = ({ onClose, setToastInfo, onCategoryAdded }) => {
       },
       body: JSON.stringify({ name: categoryName })
     })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        // Handle specific error codes
-        switch (response.status) {
-          case 400:
-            throw new Error('Invalid request');
-          case 409:
-            throw new Error('Gallery with this name already exists');
-          case 500:
-            throw new Error('Unknown error');
-          default:
-            throw new Error('Failed to add category');
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          // Handle specific error codes
+          switch (response.status) {
+            case 400:
+              throw new Error('Invalid request');
+            case 409:
+              throw new Error('Gallery with this name already exists');
+            case 500:
+              throw new Error('Unknown error');
+            default:
+              throw new Error('Failed to add category');
+          }
         }
-      }
-    })
-    .then(data => {
-      console.log('Successfully added a category:', data);
-      onCategoryAdded();
-      setToastInfo({
-        message: 'Successfully added a category!',
-        type: 'success',
-        isVisible: true
+      })
+      .then(data => {
+        console.log('Successfully added a category:', data);
+        onCategoryAdded();
+        setToastInfo({
+          message: 'Successfully added a category!',
+          type: 'success',
+          isVisible: true
+        });
+        onClose();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setToastInfo({
+          message: error.message,
+          type: 'error',
+          isVisible: true
+        });
       });
-      onClose();
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      setToastInfo({
-        message: error.message, // Use the specific error message thrown earlier
-        type: 'error',
-        isVisible: true
-      });
-    });
   };
 
   const handleAddCategory = () => {
     postCategory(categoryName);
   };
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [onClose]);
 
   return (
     <div className="preview-overlay" onClick={onClose}>

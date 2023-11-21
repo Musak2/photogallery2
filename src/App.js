@@ -6,7 +6,7 @@ import AddCategoryPopup from './components/AddCategoryPopup';
 import AddPhotosPopup from './components/AddPhotosPopup';
 import GalleryList from './components/GalleryList';
 import ImagePreviewOverlay from './components/ImagePreviewOverlay';
-import CategoryList from './components/CategoryList';
+import PhotoList from './components/PhotoList';
 import { fetchGalleryData, fetchPhotosData } from './services/apiService';
 
 function App() {
@@ -27,7 +27,6 @@ function App() {
       setBoxes(data);
     }).catch(error => {
       console.error('Error fetching gallery data:', error);
-      // Handle error (e.g., show notification)
     });
   }, [categoryAdded]);
 
@@ -42,7 +41,6 @@ function App() {
       }));
     } catch (error) {
       console.error(`Error fetching photos for category ${category}:`, error);
-      // Handle error (e.g., show notification)
     }
   };
 
@@ -60,7 +58,6 @@ function App() {
       setBoxes(data);
     }).catch(error => {
       console.error('Error refetching gallery data:', error);
-      // Handle error (e.g., show notification)
     });
   };
 
@@ -70,7 +67,6 @@ function App() {
 
   const handleCategoryClick = (category) => {
     setViewingCategory(category);
-    // console.log("Category: " + category.text);
     setCategory(category.text);
   };
 
@@ -139,7 +135,7 @@ function App() {
       )}
 
       {viewingCategory && (
-        <CategoryList
+        <PhotoList
           category={viewingCategory}
           onImageClick={openPreview}
           onAddPhotosClick={() => setShowAddPhotosPopup(true)}

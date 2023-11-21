@@ -1,14 +1,13 @@
 import React from 'react';
-import Box from './Box'; // Adjust the import path as necessary
+import Box from './Box';
+import './GalleryList.css';
 
-const GalleryList = ({ boxes, maxBoxesInRow, onCategoryClick, onAddCategoryClick }) => {
+const GalleryList = ({ boxes, onCategoryClick, onAddCategoryClick }) => {
     return (
         <>
-            {boxes.map((box, index) => (
+            {boxes.map((box) => (
                 <Box
                     key={box.id}
-                    top={225 + Math.floor(index / maxBoxesInRow) * (295 + 32)}
-                    left={304 + (index % maxBoxesInRow) * (304 + 32)}
                     text={box.text}
                     mainImage={box.mainImage}
                     onClick={() => onCategoryClick(box)}
@@ -17,21 +16,12 @@ const GalleryList = ({ boxes, maxBoxesInRow, onCategoryClick, onAddCategoryClick
             ))}
 
             <div
-                className="box"
-                style={{
-                    top: `${225 + Math.floor(boxes.length / maxBoxesInRow) * (295 + 32)}px`,
-                    left: `${304 + (boxes.length % maxBoxesInRow) * (304 + 32)}px`,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
+                className="add-category-box box"
                 onClick={onAddCategoryClick}
             >
-                <div className="plus-symbol" style={{ display: 'flex', fontSize: '24px', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="plus-symbol">
                 </div>
-                <div className="addText" style={{ height: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="add-text">
                     Pridať kategóriu
                 </div>
             </div>

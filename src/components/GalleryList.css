@@ -1,0 +1,22 @@
+
+.add-category-box {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plus-symbol {
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-text {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,73 @@
+  .popup-box2 {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .close-button {
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .drag-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+    border: dashed 1px #DDDDDD; 
+  }
+  
+  .drag-area-dragging {
+    border: dashed 3px #000000; 
+  }
+  
+  .icon-large {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+  
+  .addBoxText,
+  .addBoxMiddleText,
+  .addBoxText2 {
+    text-align: center;
+  }
+  
+  .addBoxText {
+    padding-bottom: 20px;
+  }
+  
+  .addBoxMiddleText {
+    padding-bottom: 20px;
+  }
+  
+  .addBoxText2 {
+    width: 130px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-button {
+    height: 60px;
+  }
+  
+  .file-input {
+    display: none; 
+  }
+  
+  .custom-file-upload {
+    display: block; 
+    padding: 10px;
+    cursor: pointer;
+  }
+  

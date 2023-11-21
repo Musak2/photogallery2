@@ -6,18 +6,14 @@
   border-radius: 4px;
   opacity: 1;
   transition: all 0.4s ease;
-  /* Smooth transition for all properties */
   transform-origin: center;
   cursor: pointer;
 }
 
 .box:hover {
   transform: scale(1.05);
-  /* Scale up and rotate */
   background: linear-gradient(135deg, #d3d1b0, #ffffff);
-  /* A subtle gradient */
   box-shadow: 0px 6px 30px #0000002A;
-  /* Deeper shadow for lifted effect */
 }
 
 .box-image {
@@ -52,7 +48,6 @@
 .related-image-item {
   width: 304px;
   height: 295px;
-  /* background: transparent url('img/Rectangle 8.png') 0% 0% no-repeat padding-box; */
   border-radius: 4px;
   opacity: 1;
   background-size: cover;
@@ -64,6 +59,9 @@
 }
 
 .photo-count {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 15px;
   width: 46px;
   height: 20px;
   background: #00000052;
@@ -74,6 +72,18 @@
   align-items: center;
   color: white;
   font-size: 11px;
+}
+
+@media (max-width: 600px) {
+  .photo-count {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 400px) {
+  .photo-count {
+    font-size: 7px; 
+  }
 }
 
 .plus-symbol {
