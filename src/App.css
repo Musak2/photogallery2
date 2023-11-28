@@ -2,7 +2,7 @@
   --box-width: 304px;
   --box-height: 295px;
   --box-top: 20px;
-  --box-left: 150px;
+  --box-left: 0px;
   --background-color: #e8e7d2;
   --animation-duration: 10s; 
 }
@@ -10,6 +10,7 @@
 body {
   margin: 0;
   overflow: hidden;
+  animation: colorChange var(--animation-duration) infinite;
 }
 
 @keyframes colorChange {
@@ -24,14 +25,11 @@ body {
   }
 }
 
-body {
-  animation: colorChange var(--animation-duration) infinite;
-}
-
 .App {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: left;
   gap: 32px;
   padding: var(--box-top) var(--box-left);
   max-width: calc(4 * var(--box-width) + 3 * 32px);
@@ -56,59 +54,6 @@ body {
   color: #000000;
   opacity: 1;
   cursor: pointer;
-}
-
-@media (max-width: 1600px) {
-  :root {
-    --box-width: 250px;
-    --box-height: 240px;
-  }
-}
-
-@media (max-width: 1400px) {
-  :root {
-    --box-width: 200px;
-    --box-height: 190px;
-  }
-}
-
-@media (max-width: 1200px) {
-  :root {
-    --box-width: 170px;
-    --box-height: 170px;
-  }
-}
-
-@media (max-width: 1100px) {
-  :root {
-    --box-width: 150px;
-    --box-height: 160px;
-  }
-}
-
-@media (max-width: 900px) {
-  :root {
-    --box-width: 130px;
-    --box-height: 140px;
-  }
-}
-
-@media (max-width: 500px) {
-  :root {
-    --box-width: 100px;
-    --box-height: 100px;
-  }
-  .fotogaleria-text{
-    text-align: center;
-    font-size: 15px;
-  }
-  .kategorie-text{
-    text-align: center;
-    font-size: 13px;
-  }
-  .App{
-    justify-content: center;
-  }
 }
 
 .preview-overlay {
@@ -215,4 +160,52 @@ button {
 .addBoxText2:hover {
   background-color: #000000;
   color: white;
+}
+
+@media (max-width: 1600px) {
+  :root {
+    --box-width: 250px;
+    --box-height: 240px;
+  }
+}
+
+@media (max-width: 1400px) {
+  :root {
+    --box-width: 200px;
+    --box-height: 190px;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --box-width: 170px;
+    --box-height: 170px;
+  }
+}
+
+@media (max-width: 800px) {
+  :root {
+    --box-width: 150px;
+    --box-height: 160px;
+  }
+}
+
+@media (max-width: 620px) {
+  :root {
+    --box-width: 210px;
+    --box-height: 210px;
+    --box-left: 100px;
+  }
+  .fotogaleria-text{
+    text-align: center;
+    font-size: 35px;
+  }
+  .kategorie-text{
+    text-align: center;
+    font-size: 25px;
+  }
+  .App{
+    justify-content: center;
+    padding: 0;
+  }
 }

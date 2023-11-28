@@ -1,4 +1,5 @@
 .box {
+  position: relative;
   width: var(--box-width);
   height: var(--box-height);
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -58,22 +59,6 @@
   height: 100%;
 }
 
-.photo-count {
-  position: absolute;
-  margin-left: 15px;
-  margin-top: 15px;
-  width: 46px;
-  height: 20px;
-  background: #00000052;
-  border-radius: 12px;
-  opacity: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 11px;
-}
-
 .plus-symbol {
   position: relative;
   border: solid 2px black;
@@ -108,27 +93,57 @@
   opacity: 1;
 }
 
-@media (max-width: 600px) {
+.photo-count {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 15px;
+  width: 46px;
+  height: 20px;
+  background: #00000052;
+  border-radius: 12px;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 11px;
+}
+
+.delete-icon {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: px;
+  right: 5px;
+  top: 5px;
+  color: #FFF;
+  background: #00000052;
+  cursor: pointer;
+  border-radius: 0 4px 0 4px; /* Rounded corner on the top right */
+}
+
+.delete-icon:hover {
+  transform: scale(1.05);
+  background: #c45a5a;
+}
+
+@media (max-width: 620px) {
   .photo-count {
     font-size: 9px;
   }
-}
-
-@media (max-width: 500px) {
-  .photo-count {
-    font-size: 7px;
-  }
 
   .box-text {
-    font-size: 8px;
+    font-size: 18px;
   }
 
   .addText {
-    font-size: 8px;
+    font-size: 18px;
   }
 
   .photo-count {
-    width: 29px;
-    height: 15px;
+    width: 45px;
+    height: 20px;
   }
 }

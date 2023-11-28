@@ -9,12 +9,14 @@ const AddPhotosPopup = ({ onClose, actualCategory, setToastInfo, fetchPhotosData
     const [dragging, setDragging] = useState(false);
 
     const postImages = () => {
+        console.log("Posted images: ", selectedImages);
+
         const formData = new FormData();
         for (let i = 0; i < selectedImages.length; i++) {
             formData.append(`image${i + 1}`, selectedImages[i]);
         }
 
-        const uploadUrl = `http://api.programator.sk/gallery/${encodeURIComponent(actualCategory)}`;
+        const uploadUrl = `http://api.programator.sk/gallery/${encodeURIComponent(actualCategory.text)}`;
         console.log('Uploading to:', uploadUrl);
 
         fetch(uploadUrl, {
@@ -64,6 +66,7 @@ const AddPhotosPopup = ({ onClose, actualCategory, setToastInfo, fetchPhotosData
 
     const handleFileSelect = (event) => {
         const files = event.target.files;
+        console.log("Selected files: ", files)
         setSelectedImages(files);
         setSelectedImageNames(Array.from(files).map(file => file.name));
     };

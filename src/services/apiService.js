@@ -57,3 +57,25 @@ export const fetchPhotosData = async (category) => {
         throw error;
     }
 };
+
+export const deleteGallery = async (galleryName) => {
+    try {
+        const response = await fetch(`${BASE_URL}/gallery/${encodeURIComponent(galleryName)}`, {
+            method: 'DELETE',
+            headers: {
+                // Include any necessary headers here, such as Content-Type or Authorization
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to delete gallery: ${galleryName}`);
+        }
+
+        // You might not need to return JSON if your DELETE operation does not send back a body
+        // Just return a success message or status
+        return 'Gallery deleted successfully';
+    } catch (error) {
+        console.error('Error in deleteGallery:', error);
+        throw error;
+    }
+};
