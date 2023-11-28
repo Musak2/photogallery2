@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# React Photogallery App
 
 This project was made for bart.sk company
 
