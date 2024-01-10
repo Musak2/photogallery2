@@ -1,7 +1,5 @@
 # React Photogallery App
 
-This project was made for bart.sk company
-
 In the project directory, you can run:
 
 ### `npm install`
